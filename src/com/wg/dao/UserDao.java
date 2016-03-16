@@ -5,34 +5,34 @@ import com.wg.bean.User;
 
 public interface UserDao {
 	 /**
-	  *  È¡µÃËùÓĞÓÃ»§
+	  *  å–å¾—æ‰€æœ‰ç”¨æˆ·
 	  *  @author WG
-	  *  @return ÓÃ»§ÁĞ±í
+	  *  @return ç”¨æˆ·åˆ—è¡¨
 	  */
 	 public List<User> getUser(); 
 	 /**
-	  *  ¸ù¾İÓÃ»§ÕËºÅĞÅÏ¢È¡µÃÓÃ»§
+	  *  æ ¹æ®ç”¨æˆ·è´¦å·ä¿¡æ¯å–å¾—ç”¨æˆ·
 	  *  @author WG
 	  *  @return
 	  */
 	 public User getUser(User user);
 	 
 	 /**
-	  *  Ìí¼ÓÓÃ»§
+	  *  æ·»åŠ ç”¨æˆ·
 	  *  @author WG
 	  *  @param user
 	  *  @return
 	  */
 	 public void insertUser(User user);
 	 /**
-	  *  ¸üĞÂÓÃ»§ĞÅÏ¢
+	  *  æ›´æ–°ç”¨æˆ·ä¿¡æ¯
 	  *  @author WG
 	  *  @param user
 	  *  @return
 	  */
 	 public int updateUser(User user);
 	 /**
-	  *  É¾³ıÓÃ»§
+	  *  åˆ é™¤ç”¨æˆ·
 	  *  @author WG
 	  *  @param id
 	  *  @return

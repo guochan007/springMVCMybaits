@@ -1,6 +1,8 @@
 package com.wg.test;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-//	×¢²á save
+//	æ³¨å†Œ save
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public ModelAndView save(HttpServletRequest request, User user) {
 		try {
@@ -32,7 +34,7 @@ public class UserController {
 	}
 	
 	
-//	ĞÂÔö ĞŞ¸ÄÒ³Ãæ
+//	æ–°å¢ ä¿®æ”¹é¡µé¢
 	@RequestMapping(value="addUpdate")
 	public String addUpdate(Model model,User user) {
 		if(user.getId()!=null){
@@ -47,15 +49,15 @@ public class UserController {
 	
 
 	/***
-	 * ÓÃ»§µÇÂ½£¬Ö»ÔÊĞíPOSTÌá½»µ½¸Ã·½·¨
+	 * ç”¨æˆ·ç™»é™†ï¼Œåªå…è®¸POSTæäº¤åˆ°è¯¥æ–¹æ³•
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ModelAndView login(User user) {
-		// ÑéÖ¤ÕÊºÅÃÜÂëÊÇ·ñÕıÈ·£¬·ñÔò·µ»Øµ½µÇÂ½Ò³Ãæ¡£
+		// éªŒè¯å¸å·å¯†ç æ˜¯å¦æ­£ç¡®ï¼Œå¦åˆ™è¿”å›åˆ°ç™»é™†é¡µé¢ã€‚
 		if (this.checkOK(user)) {
-			// Ö¸¶¨Òª·µ»ØµÄÒ³ÃæÎªsucc.jsp
+			// æŒ‡å®šè¦è¿”å›çš„é¡µé¢ä¸ºsucc.jsp
 			ModelAndView mav = new ModelAndView("succ");
-			// ½«²ÎÊı·µ»Ø¸øÒ³Ãæ
+			// å°†å‚æ•°è¿”å›ç»™é¡µé¢
 			mav.addObject("user", user);
 			System.out.println(user.toString());
 			return mav;
@@ -65,16 +67,16 @@ public class UserController {
 	}
 	
 	/***
-	 * ÓÃ»§µÇÂ½£¬·ÅÈësession
+	 * ç”¨æˆ·ç™»é™†ï¼Œæ”¾å…¥session
 	 */
 	@RequestMapping(value = "login2", method = RequestMethod.POST)
 	public ModelAndView login2(User user,Model model) {
-		// ÑéÖ¤ÕÊºÅÃÜÂëÊÇ·ñÕıÈ·£¬·ñÔò·µ»Øµ½µÇÂ½Ò³Ãæ¡£
+		// éªŒè¯å¸å·å¯†ç æ˜¯å¦æ­£ç¡®ï¼Œå¦åˆ™è¿”å›åˆ°ç™»é™†é¡µé¢ã€‚
 		if (this.checkOK(user)) {
 			model.addAttribute("sessionUser",user);
-			// Ö¸¶¨Òª·µ»ØµÄÒ³ÃæÎªsucc.jsp
+			// æŒ‡å®šè¦è¿”å›çš„é¡µé¢ä¸ºsucc.jsp
 			ModelAndView mav = new ModelAndView("succ");
-			// ½«²ÎÊı·µ»Ø¸øÒ³Ãæ
+			// å°†å‚æ•°è¿”å›ç»™é¡µé¢
 			mav.addObject("user", user);
 			System.out.println(user.toString());
 			return mav;
@@ -82,9 +84,42 @@ public class UserController {
 			return new ModelAndView("error");
 		}
 	}
+	
+	/***
+	 * ä»sessionä¸­è·å–useræ•°æ®   éªŒè¯æ˜¯å¦æˆåŠŸæ”¾å…¥session  æ–¹æ³•ä¸€
+	 */
+	/*
+	@RequestMapping(value = "userDetail", method = RequestMethod.GET)
+	public ModelAndView userDetail(@ModelAttribute("sessionUser")User sessionUser) {
+		// æŒ‡å®šè¦è¿”å›çš„é¡µé¢ä¸ºsucc.jsp
+		ModelAndView mav = new ModelAndView("succ");
+		// å°†å‚æ•°è¿”å›ç»™é¡µé¢
+		mav.addObject("user", sessionUser);
+		System.out.println(sessionUser.toString());
+		return mav;
+	}
+	*/
+	
+	/***
+	 * ä»sessionä¸­è·å–useræ•°æ®   éªŒè¯æ˜¯å¦æˆåŠŸæ”¾å…¥session  æ–¹æ³•äºŒ
+	 */
+	@RequestMapping(value = "userDetail", method = RequestMethod.GET)
+	public ModelAndView userDetail(HttpSession session) {
+		User sessionUser=(User)session.getAttribute("sessionUser");
+		if(sessionUser!=null){
+			// æŒ‡å®šè¦è¿”å›çš„é¡µé¢ä¸ºsucc.jsp
+			ModelAndView mav = new ModelAndView("succ");
+			// å°†å‚æ•°è¿”å›ç»™é¡µé¢
+			mav.addObject("user", sessionUser);
+			System.out.println(sessionUser.toString());
+			return mav;
+		}else{
+			return new ModelAndView("error");
+		}
+	}
 
 	/***
-	 * ÑéÖ¤ÕÊºÅÃÜÂëÊÇ·ñÕıÈ·
+	 * éªŒè¯å¸å·å¯†ç æ˜¯å¦æ­£ç¡®
 	 */
 	private boolean checkOK(User user) {
 		User userDB=null;
@@ -99,7 +134,7 @@ public class UserController {
 		return false;
 	}
 	
-//	ÏÔÊ¾ÁĞ±í1
+//	æ˜¾ç¤ºåˆ—è¡¨1
 	@RequestMapping(value="/list")
 //	@RequestMapping(value="list")
 //	@RequestMapping(value="list", method = RequestMethod.GET)
@@ -109,11 +144,11 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		return "/list.jsp";  // ²»¶Ô
+//		return "/list.jsp";  // ä¸å¯¹
 		return "list";
 	}
 	
-//	ÏÔÊ¾ÁĞ±í2
+//	æ˜¾ç¤ºåˆ—è¡¨2
 	@RequestMapping(value = "list2", method = RequestMethod.GET)
 	public ModelAndView list2() {
 		ModelAndView mav = new ModelAndView("list");
@@ -126,7 +161,7 @@ public class UserController {
 		return new ModelAndView("home");
 	}
 	
-//	ÏÔÊ¾ÁĞ±í3 ´ÓsessionÖĞÈ¡userÊı¾İ  ÕâÖÖ·½·¨ÔÚÎ´µÇÂ¼¾Í´ò¿ª¸ÃÒ³ÃæÊ±£¬»á³ö´íSession attribute 'sessionUser' required - not found in session
+//	æ˜¾ç¤ºåˆ—è¡¨3 ä»sessionä¸­å–useræ•°æ®  è¿™ç§æ–¹æ³•åœ¨æœªç™»å½•å°±æ‰“å¼€è¯¥é¡µé¢æ—¶ï¼Œä¼šå‡ºé”™Session attribute 'sessionUser' required - not found in session
 	@RequestMapping(value = "list3", method = RequestMethod.GET)
 	public ModelAndView list3(@ModelAttribute("sessionUser")User sessionUser) {
 		ModelAndView mav = new ModelAndView("list3");
@@ -139,7 +174,7 @@ public class UserController {
 		return new ModelAndView("home");
 	}
 	
-//	É¾³ı
+//	åˆ é™¤
 	@RequestMapping("del")
 	public String del(User user) {
 		try {
@@ -147,7 +182,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		return this.list2();//ÕâÑùÒ²ÄÜ
+//		return this.list2();//è¿™æ ·ä¹Ÿèƒ½
 		return "redirect:/list";
 	}
 	

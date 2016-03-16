@@ -6,24 +6,24 @@ import com.wg.bean.User;
 
 public interface UserService {
 	/**
-	 * È¡µÃËùÓĞÓÃ»§
+	 * å–å¾—æ‰€æœ‰ç”¨æˆ·
 	 * 
 	 * @author JLC
-	 * @return ÓÃ»§ÁĞ±í
+	 * @return ç”¨æˆ·åˆ—è¡¨
 	 */
 	public List<User> getUsers() throws Exception;
 
 	/**
-	 * È¡µÃÓÃ»§ĞÅÏ¢
+	 * å–å¾—ç”¨æˆ·ä¿¡æ¯
 	 * 
 	 * @author JLC
-	 * @return User¶ÔÏó
+	 * @return Userå¯¹è±¡
 	 * @throws Exception
 	 */
 	public User getUserInfo(User user) throws Exception;
 
 	/**
-	 * ±£´æÓÃ»§
+	 * ä¿å­˜ç”¨æˆ·
 	 * 
 	 * @author JLC
 	 * @param user
@@ -33,7 +33,7 @@ public interface UserService {
 	public void saveUser(User user) throws Exception;
 
 	/**
-	 * É¾³ıÓÃ»§
+	 * åˆ é™¤ç”¨æˆ·
 	 * 
 	 * @author JLC
 	 * @param id

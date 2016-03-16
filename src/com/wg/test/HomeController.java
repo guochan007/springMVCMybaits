@@ -8,13 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	/***
-	 * Ê×Ò³ ·µ»ØÖÁ/page/home.jspÒ³Ãæ
+	 * é¦–é¡µ è¿”å›è‡³/page/home.jspé¡µé¢
 	 * 
 	 * @return
 	 */
 	@RequestMapping("hello")
 	public ModelAndView index() {
-		// ´´½¨Ä£ĞÍ¸úÊÓÍ¼£¬ÓÃÓÚäÖÈ¾Ò³Ãæ¡£²¢ÇÒÖ¸¶¨Òª·µ»ØµÄÒ³ÃæÎªhomeÒ³Ãæ
+		// åˆ›å»ºæ¨¡å‹è·Ÿè§†å›¾ï¼Œç”¨äºæ¸²æŸ“é¡µé¢ã€‚å¹¶ä¸”æŒ‡å®šè¦è¿”å›çš„é¡µé¢ä¸ºhomeé¡µé¢
 		ModelAndView mav = new ModelAndView("home");
 		return mav;
 	}

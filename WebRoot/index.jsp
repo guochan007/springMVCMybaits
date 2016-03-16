@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <a href="hello.do">点击hello</a><br>
     <a href="<%=path%>/page/login.jsp">登录</a><br>
-    <a href="<%=path%>/page/login2.jsp">登录（加入session）</a><br>
+    <a href="<%=path%>/page/login2.jsp">登录（加入session）</a>&nbsp;&nbsp;&nbsp;<a href="userDetail.do">验证session</a><br>
     <a href="<%=path%>/addUpdate">新增用户</a><br>
     <a href="<%=path%>/list">用户列表</a><br>
   </body>

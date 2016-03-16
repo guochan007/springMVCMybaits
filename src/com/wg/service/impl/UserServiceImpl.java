@@ -19,12 +19,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public List<User> getUsers() {
-
-		return userDao.getUser();
+		return userDao.getUser();//没传参数
 	}
 
 	public User getUserInfo(User user) throws Exception {
-		return userDao.getUser(user);
+		return userDao.getUser(user);//传参数
 	}
 
 	public void saveUser(User user) throws Exception {
